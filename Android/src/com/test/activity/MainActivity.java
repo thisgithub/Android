@@ -1,19 +1,20 @@
 package com.test.activity;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
 	
-	ListView list;
 	EditText username;
 	EditText password;
+	private static final int REQUEST_CODE = 1;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -31,13 +32,38 @@ public class MainActivity extends Activity {
 				if("admin".equals(s_username) && "admin".equals(s_password)){
 					Intent intent = new Intent();
 					intent.setClass(MainActivity.this, IndexActivity.class);
-					startActivity(intent);
+					intent.putExtra("name", "theusername");
+					Bundle extras = new Bundle();
+					extras.putStringArrayList("sendList", getSendList());
+					intent.putExtras(extras);
+					//startActivity(intent);
+					//从第二个页面返回用到的
+					startActivityForResult(intent, REQUEST_CODE);
 				} else {
 					Toast.makeText(getApplicationContext(), R.string.login_error, Toast.LENGTH_LONG).show();
 				}
 			}
 		});
-		list = (ListView)findViewById(R.id.list);
 	}
 	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		super.onActivityResult(requestCode, resultCode, data);
+		switch(requestCode){
+		case RESULT_OK:
+			Bundle bundle = new Bundle();
+			String name = bundle.getString("name");
+			Toast.makeText(getApplicationContext(), name, Toast.LENGTH_SHORT).show();
+		}
+	}
+	
+	private ArrayList<String> getSendList(){
+		ArrayList<String> list = new ArrayList<String>();
+		list.add("do one thing at a time, and do well");
+		list.add("never forget to say 'thanks'");
+		list.add("keep on going never give up");
+		list.add("whatever is worth doing is worth doing well");
+		return list;
+	}
 }

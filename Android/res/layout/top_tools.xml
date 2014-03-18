@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent"
+  android:layout_height="wrap_content"
+  android:background="@drawable/nav_bg"
+  android:padding="5dp"
+  android:weightSum="1">
+    <!-- 顶部工具栏布局 -->
+    	<!-- 左边按钮显示区 -->
+    	<LinearLayout 
+	    	android:layout_height="fill_parent"
+	    	android:layout_width="wrap_content"
+	    	android:gravity="center"
+	    	>
+	    	<Button 
+	    		android:layout_height="wrap_content"
+	    		android:layout_width="wrap_content"
+	    		android:id="@+id/top_bar_left_button"
+	    		android:background="@drawable/nav_back_btn_selector"
+	    	/>
+    	</LinearLayout>
+    	<!-- 中间图片显示区 -->
+    	<LinearLayout 
+	    	android:layout_height="fill_parent" 
+	    	android:layout_width="wrap_content"
+	    	android:layout_weight="1"
+	    	android:gravity="center"
+	    	>
+	    	 <TextView 
+	    	 	android:layout_height="wrap_content"
+	    		android:layout_width="wrap_content"
+	    		android:id="@+id/top_bar_center_text"
+	    		style="@style/top_text_style"
+	    	 />
+    	</LinearLayout>
+    	<!-- 右边图片显示区 -->
+    	<LinearLayout 
+	    	android:layout_height="fill_parent"
+	    	android:layout_width="wrap_content"
+	    	android:gravity="center">
+	    	<Button 
+	    		android:layout_height="wrap_content"
+	    		android:layout_width="wrap_content"
+	    		android:id="@+id/top_bar_right_button"
+	    		android:background="@drawable/transform_btn_selector"
+	    	/>
+    	</LinearLayout>
+</LinearLayout>
