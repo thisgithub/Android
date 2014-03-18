@@ -2,20 +2,86 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/page_bg"
+    android:gravity="center_horizontal"
     android:orientation="vertical" >
-
-    <EditText
-        android:id="@+id/editText1"
-        android:layout_width="match_parent"
+    <LinearLayout android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world"
-        android:ems="10" >
-    </EditText>
-
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
+        android:background="@drawable/nav_bg"
+	    android:padding="5dp"
+	    android:weightSum="1"
+        android:gravity="center">
+        <TextView android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/top_text"
+            android:id="@+id/top_text"
+            style="@style/top_text_style"/>
+    </LinearLayout>
+	
+    <RelativeLayout android:layout_width="match_parent"
+        android:layout_height="130dip"
+        android:layout_gravity="center"
+        android:layout_marginLeft="10.0dp"
+        android:layout_marginRight="10.0dp"
+        android:layout_marginTop="10.0dp"
+        android:paddingBottom="10dp"
+        android:background="@drawable/background">
+        
+        <TextView android:id="@+id/text_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dip"
+            android:layout_marginTop="15dip"
+            android:gravity="center_vertical"
+            android:lines="1"
+            android:text="@string/username_label"
+            android:textSize="18sp"
+            android:textColor="@drawable/black"/>
+        <EditText android:id="@+id/username" 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dip"
+            android:layout_marginRight="10dip"
+            android:layout_alignBaseline="@id/text_username"
+            android:layout_toRightOf="@id/text_username"
+            android:hint="@string/login_username"
+            android:ems="20" android:singleLine="true"
+            />
+        <ImageView android:id="@+id/full_line"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dip"
+            android:background="@drawable/full_line"
+            android:layout_below="@id/text_username"/>
+        
+        <TextView android:id="@+id/text_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/text_username"
+            android:textColor="@drawable/black"
+            android:textSize="18sp"
+            android:layout_marginTop="20dip"
+            android:lines="1"
+            android:layout_below="@id/full_line"
+            android:text="@string/password_label"/>
+        <EditText android:id="@+id/password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/text_password"
+            android:layout_toRightOf="@id/text_password"
+            android:hint="@string/login_password"
+            android:layout_marginLeft="10dip"
+            android:layout_marginRight="10dip"
+            android:inputType="textPassword"
+            android:singleLine="true"
+            android:ems="20"/>
+    </RelativeLayout>
+    
+    <Button android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button" />
-
+        android:id="@+id/login_button"
+        android:layout_margin="10dip"
+        android:gravity="center_horizontal"
+        android:background="@drawable/log_btn_selector"/>
 </LinearLayout>

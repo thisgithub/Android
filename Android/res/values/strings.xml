@@ -2,4 +2,12 @@
 
     <string name="app_name">AndroidTest</string>
 	<string name="hello_world">Hello World! </string>
+	
+	<string name="top_text">用户登录</string>
+	<string name="username_label">用户:</string>
+	<string name="login_username">请输入用户名</string>
+	<string name="password_label">密码:</string>
+	<string name="login_password">请输入密码</string>
+	<string name="index_text">首页</string>
+	<string name="login_error">用户为admin，密码为admin</string>
 </resources>
