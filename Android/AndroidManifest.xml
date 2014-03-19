@@ -20,6 +20,15 @@
             </intent-filter>
         </activity>
         <activity android:name=".IndexActivity"></activity>
+        
+        <receiver android:name="com.test.receiver.MyReceiver">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </receiver>
     </application>
+    
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
 </manifest>
