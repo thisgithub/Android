@@ -1,11 +1,10 @@
 package com.test.activity;
 
-import java.util.ArrayList;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -20,6 +19,7 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.main);
 		Button btn = (Button)findViewById(R.id.login_button);
 		username = (EditText)findViewById(R.id.username);
@@ -34,7 +34,6 @@ public class MainActivity extends Activity {
 					intent.setClass(MainActivity.this, IndexActivity.class);
 					intent.putExtra("name", "theusername");
 					Bundle extras = new Bundle();
-					extras.putStringArrayList("sendList", getSendList());
 					intent.putExtras(extras);
 					//startActivity(intent);
 					//从第二个页面返回用到的
@@ -58,12 +57,4 @@ public class MainActivity extends Activity {
 		}
 	}
 	
-	private ArrayList<String> getSendList(){
-		ArrayList<String> list = new ArrayList<String>();
-		list.add("do one thing at a time, and do well");
-		list.add("never forget to say 'thanks'");
-		list.add("keep on going never give up");
-		list.add("whatever is worth doing is worth doing well");
-		return list;
-	}
 }

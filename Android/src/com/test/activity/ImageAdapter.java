@@ -3,8 +3,8 @@ package com.test.activity;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.BaseAdapter;
+import android.widget.GridView;
 import android.widget.ImageView;
 
 public class ImageAdapter extends BaseAdapter{
@@ -31,7 +31,7 @@ public class ImageAdapter extends BaseAdapter{
 		ImageView view;
 		if(convertView == null){
 			view = new ImageView(context);
-			view.setLayoutParams(new LayoutParams(85, 85));
+			view.setLayoutParams(new GridView.LayoutParams(85, 85));
 			view.setScaleType(ImageView.ScaleType.CENTER_CROP);
 			view.setPadding(8, 8, 8, 8);
 		} else {
