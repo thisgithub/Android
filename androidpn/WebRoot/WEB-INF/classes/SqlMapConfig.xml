@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMapConfig PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
+
+<sqlMapConfig>
+	<settings lazyLoadingEnabled="false" useStatementNamespaces="true" />
+	
+	<sqlMap resource="/com/test/android/push/dao/impl/apnuser_SqlMap.xml" />
+	<sqlMap resource="/com/test/android/push/dao/impl/message_SqlMap.xml" />
+	
+	<!-- 推送 
+	<sqlMap resource="/com/ifudi/digitcity/common/pns/apple/dao/impl/ibatis/appleToken_SqlMap.xml" />
+	-->
+</sqlMapConfig>

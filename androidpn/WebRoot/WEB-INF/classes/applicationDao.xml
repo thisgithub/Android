@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx-2.5.xsd	
+	">
+	<!-- datasource config begin -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+	    <property name="driverClass" value="com.mysql.jdbc.Driver"/>
+	    <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/test"/>
+	    <property name="user" value="root"/>
+	    <property name="password" value="root"/>
+		<property name="minPoolSize" value="5"/>
+		<property name="maxPoolSize" value="10"/>
+		<property name="initialPoolSize" value="5"/>
+		<property name="maxIdleTime" value="600"/>
+	</bean>
+	<!-- datasource config end -->
+	
+	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="classpath:SqlMapConfig.xml"/>
+	</bean>
+	
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    
+     <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="*" read-only="false" rollback-for="Exception,RuntimeException" propagation="REQUIRED"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <aop:config proxy-target-class="true">
+        <aop:pointcut id="serviceManage" expression="execution(* com.test.android.push.service.*.*.*(..))"/>
+        <aop:advisor pointcut-ref="serviceManage" advice-ref="txAdvice"/>
+    </aop:config>
+    
+    <bean name="apnuserDao" class="com.test.android.push.dao.impl.ApnUserDaoImple">
+    	<property name="sqlMapClient" ref="sqlMapClient"></property>
+    </bean>
+    
+    <bean name="messageDao" class="com.test.android.push.dao.impl.MessageDaoImple">
+    	<property name="sqlMapClient" ref="sqlMapClient"></property>
+    </bean>
+    
+</beans>

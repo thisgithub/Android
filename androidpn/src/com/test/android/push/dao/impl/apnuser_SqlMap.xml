@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<sqlMap namespace="apnuser">
+ <typeAlias alias="apnuserBean" type="com.test.android.push.pojo.ApnUser"/>
+    <resultMap id="apnuserResult" class="com.test.android.push.pojo.ApnUser">
+		<result column="id" property="id" javaType="java.lang.Long"/>
+		<result column="username" property="username" javaType="string" />
+		<result column="password" property="password" javaType="string" />
+		<result column="online" property="online" javaType="java.lang.Integer" />
+		<result column="createDate" property="createDate" javaType="java.util.Date" />
+    </resultMap>
+    
+    <sql id="getApnuserAllFieldSql">
+		select
+			id,
+			username,
+			password,
+			online,
+			createDate
+		from user 
+	</sql>
+	
+	<select id="getApnuserById" resultMap="apnuserResult" parameterClass="long">
+		<include refid="getApnuserAllFieldSql"/>
+		where id = #value#
+	</select>
+	
+	<select id="getApnuserByToken" resultMap="apnuserResult" parameterClass="string">
+		<include refid="getApnuserAllFieldSql"/>
+		where username = #value#
+	</select>
+	
+	<select id="getApnuserByAppTypeUserId" resultMap="apnuserResult" parameterClass="java.util.HashMap">
+		<include refid="getApnuserAllFieldSql"/>
+		where 1=1
+		<isNotNull prepend="and" property="id">
+		     		id = #id#
+		     	</isNotNull>
+		     	<isNotNull prepend="and" property="username">
+		     		username = #username#
+		     	</isNotNull>
+		     	<isNotNull prepend="and" property="password">
+		     		password = #password#
+		     	</isNotNull>
+		     	<isNotNull prepend="and" property="online">
+		     		online = #online#
+		     	</isNotNull>
+	</select>
+	
+	<select id="getApnuserByUserId" resultMap="apnuserResult" parameterClass="java.lang.Long">
+		<include refid="getApnuserAllFieldSql"/>
+		where id = #value#
+	</select>
+
+    <select id="getApnuserList" resultMap="apnuserResult">
+    	<include refid="getApnuserAllFieldSql"/> 
+	</select>
+	
+	<insert id="insertApnuser" parameterClass="com.test.android.push.pojo.ApnUser">
+     	insert into user (
+     		id,
+			username,
+			password,
+			online,
+			createDate
+     	)
+     	values (
+     		#id#,
+			#username#,
+			#password#,
+			#online#,
+			#createDate#
+     	)
+    </insert>
+	<update id="updateApnuser" parameterClass="com.test.android.push.pojo.ApnUser">
+		update user 
+		set 
+			username = #username#,
+			password = #password#,
+			online = #online#,
+			createDate = #createDate#
+		where id = #id#
+	</update>
+	
+    <delete id="deleteApnuser" parameterClass="java.lang.Long">
+    	delete from user
+    	where id = #value#
+    </delete>
+</sqlMap>

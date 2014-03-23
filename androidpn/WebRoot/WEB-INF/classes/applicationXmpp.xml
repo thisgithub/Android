@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:aop="http://www.springframework.org/schema/aop"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd 
+                           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd"> 
+
+	<!-- android  -->	
+	<bean id="xmppServer" class="com.test.android.push.xmpp.XmppServer" >
+	</bean>
+	
+	<bean id="xmppHandler" class="com.test.android.push.xmpp.net.XmppIoHandler" />
+
+	<bean id="filterChainBuilder"
+		class="org.apache.mina.core.filterchain.DefaultIoFilterChainBuilder">
+		<property name="filters">
+			<map>
+				<entry key="executor">
+					<bean class="org.apache.mina.filter.executor.ExecutorFilter" />
+				</entry>
+				<entry key="codec">
+					<bean class="org.apache.mina.filter.codec.ProtocolCodecFilter">
+						<constructor-arg>
+							<bean class="com.test.android.push.xmpp.codec.XmppCodecFactory" />
+						</constructor-arg>
+					</bean>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="ioAcceptor" class="org.apache.mina.transport.socket.nio.NioSocketAcceptor"
+		init-method="bind" destroy-method="unbind">
+		<property name="defaultLocalAddress" ref="defaultLocalAddress" />
+		<property name="handler" ref="xmppHandler" />
+		<property name="filterChainBuilder" ref="filterChainBuilder" />
+		<property name="reuseAddress" value="true" />
+	</bean>
+	
+	<bean id="defaultLocalAddress" class="java.net.InetSocketAddress">
+		<!-- 外网服务器配置
+		<constructor-arg type="java.lang.String" value="192.168.2.1"></constructor-arg>
+		-->
+		<constructor-arg type="java.lang.String" value="114.249.221.25"></constructor-arg>
+		<constructor-arg type="int" value="5222"></constructor-arg>
+	</bean>
+</beans>

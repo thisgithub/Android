@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="androidpn"
+  id="myeclipse.1395285307984"
+  context-root="/androidpn"
+  j2ee-spec="5.0"
+  archive="androidpn.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

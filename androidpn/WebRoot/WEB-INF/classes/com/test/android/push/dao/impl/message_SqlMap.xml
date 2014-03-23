@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<sqlMap namespace="message">
+ <typeAlias alias="messageBean" type="com.test.android.push.pojo.Message"/>
+    <resultMap id="messageResult" class="com.test.android.push.pojo.Message">
+		<result column="id" property="id" javaType="java.lang.Long"/>
+		<result column="ownerId" property="ownerId" javaType="java.lang.Long" />
+		<result column="senderId" property="senderId" javaType="java.lang.Long" />
+		<result column="receiverId" property="receiverId" javaType="java.lang.Long" />
+		<result column="message" property="message" javaType="string" />
+		<result column="flag" property="flag" javaType="java.lang.Integer" />
+		<result column="deleted" property="deleted" javaType="java.lang.Integer" />
+		<result column="createTime" property="createTime" javaType="java.util.Date" />
+    </resultMap>
+    
+    <sql id="getMessageAllFieldSql">
+		select
+			id,
+			ownerId,
+			senderId,
+			receiverId,
+			message,
+			flag,
+			deleted,
+			createTime
+		from message 
+	</sql>
+	
+	<select id="getMessageById" resultMap="messageResult" parameterClass="long">
+		<include refid="getMessageAllFieldSql"/>
+		where id = #value#
+	</select>
+	
+	<select id="getMessageByToken" resultMap="messageResult" parameterClass="long">
+		<include refid="getMessageAllFieldSql"/>
+		where id = #value#
+	</select>
+	
+	<select id="getMessageByAppTypeUserId" resultMap="messageResult" parameterClass="java.util.HashMap">
+		<include refid="getMessageAllFieldSql"/>
+		where 1=1
+		<isNotNull prepend="and" property="id">
+		     		id = #id#
+		     	</isNotNull>
+	</select>
+	
+	<select id="getMessageByUserId" resultMap="messageResult" parameterClass="java.lang.Long">
+		<include refid="getMessageAllFieldSql"/>
+		where id = #value#
+	</select>
+
+    <select id="getMessageList" resultMap="messageResult">
+    	<include refid="getMessageAllFieldSql"/> 
+	</select>
+	
+	<insert id="insertMessage" parameterClass="com.test.android.push.pojo.Message">
+     	insert into message (
+     		id,
+			ownerId,
+			senderId,
+			receiverId,
+			message,
+			flag,
+			deleted,
+			createTime
+     	)
+     	values (
+     		#id#,
+			#ownerId#,
+			#senderId#,
+			#receiverId#,
+			#message#,
+			#flag#,
+			#deleted#,
+			#createTime#
+     	)
+     	<selectKey resultClass="java.lang.Long" keyProperty="id">
+			select LAST_INSERT_ID() as id
+		</selectKey>
+    </insert>
+	<update id="updateMessage" parameterClass="com.test.android.push.pojo.Message">
+		update message 
+		set 
+			ownerId = #ownerId#,
+			senderId = #senderId#,
+			receiverId = #receiverId#,
+			createTime = #createTime#
+		where id = #id#
+	</update>
+	
+    <delete id="deleteMessage" parameterClass="java.lang.Long">
+    	delete from message
+    	where id = #value#
+    </delete>
+</sqlMap>
