@@ -41,7 +41,7 @@
 		<!-- 外网服务器配置
 		<constructor-arg type="java.lang.String" value="192.168.2.1"></constructor-arg>
 		-->
-		<constructor-arg type="java.lang.String" value="114.249.221.25"></constructor-arg>
+		<constructor-arg type="java.lang.String" value="114.249.219.207"></constructor-arg>
 		<constructor-arg type="int" value="5222"></constructor-arg>
 	</bean>
 </beans>

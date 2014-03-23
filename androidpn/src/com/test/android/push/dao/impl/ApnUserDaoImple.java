@@ -1,6 +1,7 @@
 package com.test.android.push.dao.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
 
@@ -24,6 +25,12 @@ public class ApnUserDaoImple extends SqlMapClientDaoSupport implements ApnUserDa
 	@Override
 	public void updateApnUser(ApnUser apnuser) {
 		getSqlMapClientTemplate().update("apnuser.updateApnuser", apnuser);
+	}
+
+	@Override
+	public ApnUser getApnUser(Map<String, String> param) {
+		ApnUser user = (ApnUser)getSqlMapClientTemplate().queryForObject("apnuser.getApnuserByAppTypeUserId", param);
+		return user;
 	}
 	
 }

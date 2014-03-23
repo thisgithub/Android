@@ -34,4 +34,6 @@ public interface AndroidService {
 	 */
 	public ApnUser getAndroidPns(Long id) throws KapuException;
 	
+	public ApnUser getApnUser(String username, String password) throws KapuException;
+	
 }
