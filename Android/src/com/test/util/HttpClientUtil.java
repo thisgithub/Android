@@ -9,13 +9,16 @@ import java.util.Map;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.impl.conn.DefaultClientConnection;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.params.CoreConnectionPNames;
+import org.apache.http.util.EntityUtils;
 
 /**
  * 访问网络相关处理
@@ -25,58 +28,85 @@ import org.apache.http.message.BasicNameValuePair;
 public class HttpClientUtil {
 	
 	
-	public static String getStringByGet(String url, Map params, int timeOut){
+	/**
+	 * 处理get  请求
+	 * @param url
+	 * @param params
+	 * @param timeOut
+	 * @return
+	 */
+	public static String getStringByGet(String url, Map params, int timeOut) throws Exception{
 		LogUtil.debug("-------get url----------"  + url);
-		HttpGet get = new HttpGet(url);
-		HttpClient client = new DefaultHttpClient();
-		StringBuffer sb = new StringBuffer();
-		InputStream is;
-		try {
-			HttpResponse response = client.execute(get);
-			HttpEntity entity = response.getEntity();
-			is = entity.getContent();
-			BufferedReader br = new BufferedReader(new InputStreamReader(is));
-			String line = null;
-			while((line = br.readLine()) != null){
-				sb.append(line);
+		String responseStr;
+		String requestUrl;
+		List<NameValuePair> pairs = new ArrayList<NameValuePair>();
+		String pairsStr = "";
+		if(params != null){
+			for(Object key : params.keySet()){
+				Object value = params.get(key);
+				pairs.add(new BasicNameValuePair(key.toString(), value.toString()));
 			}
-			LogUtil.debug("----sb.string---------" + sb.toString());
-		} catch (Exception e) {
-			e.printStackTrace();
+			pairsStr = URLEncodedUtils.format(pairs, "utf-8");
 		}
-		return sb.toString();
+		if(pairsStr == null || "".equals(pairsStr)){
+			requestUrl = url;
+		} else {
+			requestUrl = url + "?" + pairsStr;
+		}
+		
+		HttpGet request = new HttpGet(requestUrl);
+		HttpClient client = new DefaultHttpClient();
+		client.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, timeOut);
+		client.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, timeOut);
+		HttpResponse response = client.execute(request);
+		HttpEntity entity = response.getEntity();
+		responseStr = EntityUtils.toString(entity, "utf-8");
+		return responseStr;
 	}
 	
-	public static String getStringByPost(String url){
-		HttpPost post;
-		HttpClient client;
-		HttpResponse response;
-		UrlEncodedFormEntity urlEntity;
-		HttpEntity entity;
-		InputStream is;
-		StringBuffer sb = new StringBuffer();
-		try {
-			post = new HttpPost(url);
-			client = new DefaultHttpClient();
-			List<BasicNameValuePair> pairs = new ArrayList<BasicNameValuePair>();
-			pairs.add(new BasicNameValuePair("username", "admin"));
-			pairs.add(new BasicNameValuePair("password", "admin"));
-			urlEntity = new UrlEncodedFormEntity(pairs);
-			post.setEntity(urlEntity);
-			
-			response = client.execute(post);
-			entity = response.getEntity();
-			is = entity.getContent();
-			BufferedReader br = new BufferedReader(new InputStreamReader(is));
-			String line = null;
-			while((line = br.readLine()) != null){
-				sb.append(line);
+	/**
+	 * 处理post请求
+	 * @param url
+	 * @return
+	 */
+	public static String getStringByPost(String url, Map params, int timeOut) throws Exception{
+		LogUtil.debug("----post url--------" + url);
+		String result = null;
+		StringBuilder sb = new StringBuilder();
+		HttpClient client = new DefaultHttpClient();
+		client.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, timeOut);
+		client.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, timeOut * 1000);
+		HttpPost request = new HttpPost(url);
+		LogUtil.debug("上传的参数： " + params);
+		if(params != null){
+			List<NameValuePair> postParams = new ArrayList<NameValuePair>();
+			for(Object key : params.keySet()){
+				Object value = params.get(key);
+				if(null == value){
+					continue;
+				} else {
+					postParams.add(new BasicNameValuePair(key.toString(), value.toString()));
+				}
 			}
-			LogUtil.debug("---------sb.string-----------------" + sb.toString());
-		} catch (Exception e) {
-			e.printStackTrace();
-			LogUtil.error("post error------------------------", e);
+			LogUtil.debug("posparams:   " + postParams.size());
+			UrlEncodedFormEntity formEntity = new UrlEncodedFormEntity(postParams);
+			request.setEntity(formEntity);
 		}
-		return sb.toString();
+		
+		HttpResponse response = client.execute(request);
+		HttpEntity entity = response.getEntity();
+		LogUtil.debug("entity" + (entity == null));
+		if(entity != null){
+			BufferedReader reader = new BufferedReader(new InputStreamReader(entity.getContent(), "UTF-8"));
+			String line = null;
+			while((line = reader.readLine()) != null){
+				sb.append(line);
+				LogUtil.debug("line:  " + line);
+			}
+			reader.close();
+		}
+		
+		result = sb.toString();
+		return result;
 	}
 }
