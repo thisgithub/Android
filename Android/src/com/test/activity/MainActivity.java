@@ -1,7 +1,10 @@
 package com.test.activity;
 
+import com.test.util.HttpClientUtil;
+
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -37,12 +40,14 @@ public class MainActivity extends Activity {
 					intent.putExtras(extras);
 					//startActivity(intent);
 					//从第二个页面返回用到的
-					startActivityForResult(intent, REQUEST_CODE);
-				} else {
+					startActivityForResult(intent, REQUEST_CODE);   
+				} else {   
 					Toast.makeText(getApplicationContext(), R.string.login_error, Toast.LENGTH_LONG).show();
 				}
 			}
 		});
+		
+		new TestTask().execute(0);
 	}
 	
 	@Override
@@ -57,4 +62,20 @@ public class MainActivity extends Activity {
 		}
 	}
 	
+	
+	class TestTask extends AsyncTask<Integer, Void, String>{
+		private String result;
+		@Override
+		protected String doInBackground(Integer... params) {
+			String url = "http://10.10.38.108:8080/androidpn/manage/login.action";
+			result = HttpClientUtil.getStringByPost(url);
+			return result;
+		}
+		
+		@Override
+		protected void onPostExecute(String result) {
+			super.onPostExecute(result);
+			Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show();
+		}
+	}
 }
