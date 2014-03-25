@@ -1,7 +1,10 @@
 package com.test.activity;
 
-import android.app.Activity;
+import android.app.AlertDialog.Builder;
+import android.content.DialogInterface;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -10,7 +13,10 @@ import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class IndexActivity extends Activity implements OnClickListener{
+import com.test.util.LogUtil;
+import com.test.util.SharedPreferencesUtil;
+
+public class IndexActivity extends BaseActivity implements OnClickListener{
 	
 	ListView list ;
 	GridView gridView;
@@ -18,6 +24,7 @@ public class IndexActivity extends Activity implements OnClickListener{
 	ImageAdapter imageAdapter;
 	StrListAdapter strListAdapter;
 	TextView topText;
+	Button exitBtn;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +43,9 @@ public class IndexActivity extends Activity implements OnClickListener{
 		
 		//
 		Button gridBtn = (Button)findViewById(R.id.top_bar_right_button);
+		exitBtn = (Button)findViewById(R.id.top_bar_left_button);
 		gridBtn.setOnClickListener(this);
+		exitBtn.setOnClickListener(this);
 	}
 
 	@Override
@@ -57,8 +66,86 @@ public class IndexActivity extends Activity implements OnClickListener{
 				list.setAdapter(strListAdapter);
 				strListAdapter.notifyDataSetChanged();
 			}
+			break;
+		case R.id.top_bar_left_button:
+			String msg = "确定要退出吗？";
+			Builder builder = new Builder(IndexActivity.this);
+			builder.setTitle("提示");
+			builder.setMessage(msg);
+			builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					LogUtil.debug("------------退出-----------");
+					SharedPreferencesUtil.clearUserInfo(getApplicationContext());
+					IndexActivity.this.finish();
+					android.os.Process.killProcess(android.os.Process.myPid());
+					System.exit(0);
+				}
+			});
+			builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					dialog.cancel();
+				}
+			});
+			
+			builder.show();
 		}
 	}
 	
+	//退出键
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if(keyCode == KeyEvent.KEYCODE_BACK){
+			String msg = "确定要退出吗？";
+			Builder builder = new Builder(IndexActivity.this);
+			builder.setTitle("提示");
+			builder.setMessage(msg);
+			builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					LogUtil.debug("------------退出键退出-----------");
+					SharedPreferencesUtil.clearUserInfo(getApplicationContext());
+					IndexActivity.this.finish();
+					android.os.Process.killProcess(android.os.Process.myPid());
+					System.exit(0);
+				}
+			});
+			builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					dialog.cancel();
+				}
+			});
+			
+			builder.show();
+			return true;
+		} else {
+			return super.onKeyDown(keyCode, event);
+		}
+	}
+	
+	class uploadUserStateTast extends AsyncTask<Integer, Void, String>{
+		private String result;
+		@Override
+		protected String doInBackground(Integer... params) {
+			return null;
+		}
+		
+		@Override
+		protected void onPostExecute(String result) {
+			LogUtil.debug("onPostExecute()-------------" + result);
+			IndexActivity.this.finish();
+			android.os.Process.killProcess(android.os.Process.myPid());
+			System.exit(0);
+			super.onPostExecute(result);
+		}
+		
+	}
+	
+	//
+	private void onExitCurrentApplication(){
+		
+	}
 	
 }

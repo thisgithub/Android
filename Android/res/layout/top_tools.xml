@@ -17,7 +17,7 @@
 	    		android:layout_height="wrap_content"
 	    		android:layout_width="wrap_content"
 	    		android:id="@+id/top_bar_left_button"
-	    		android:background="@drawable/nav_back_btn_selector"
+	    		android:background="@drawable/exit_btn_selector"
 	    	/>
     	</LinearLayout>
     	<!-- 中间图片显示区 -->
