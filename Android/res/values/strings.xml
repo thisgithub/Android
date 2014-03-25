@@ -10,4 +10,11 @@
 	<string name="login_password">请输入密码</string>
 	<string name="index_text">首页面</string>
 	<string name="login_error">用户为admin，密码为admin</string>
+	
+	
+	<!-- 接口地址 -->
+	<string name="urlConnection">http://221.221.146.15:9090/androidpn</string>
+<!-- 	<string name="urlConnection">http://10.10.38.108:8080/androidpn</string> -->
+	
+	<string name="user_login_action">/manage/login.action</string>
 </resources>

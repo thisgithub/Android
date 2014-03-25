@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.test.model.UserBean;
+import com.test.util.ApplicationContext;
 import com.test.util.HttpClientUtil;
 import com.test.util.JSONUtil;
 import com.test.util.LogUtil;
@@ -24,14 +25,14 @@ import com.test.util.SharedPreferencesUtil;
 
 public class MainActivity extends BaseActivity implements OnClickListener{
 	
-	String usernameStr;
-	String passwordStr;
-	EditText username;
-	EditText password;
-	Context context;
-	UserBean user;
-	Button btn;
-	SharedPreferences sf;
+	private String usernameStr;
+	private String passwordStr;
+	private EditText username;
+	private EditText password;
+	private Context context;
+	private UserBean user;
+	private Button btn;
+	private SharedPreferences sf;
 	private static final int REQUEST_CODE = 1;
 
 	@Override
@@ -54,6 +55,7 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 	}
 	
 	public void initDate(){
+		context = this;
 		username.setText(usernameStr);
 		password.setText(passwordStr);
 		
@@ -93,10 +95,9 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 		}
 	}
 	
+	private String url;
 	
 	class TestTask extends AsyncTask<Integer, Void, String>{
-//		String url = "http://169.254.136.38:9090/androidpn/user/login.action";
-		String url = "http://10.10.38.108:8080/androidpn/manage/login.action";
 		private String result;
 		private ProgressDialog progressDialog;
 		
@@ -112,6 +113,7 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 		@Override
 		protected String doInBackground(Integer... params) {
 			LogUtil.debug("------doInBackground()------");
+			url = ApplicationContext.getActionUrlByResId(context, R.string.user_login_action);
 			Map map = new HashMap();
 			map.put("username", usernameStr);
 			map.put("password", passwordStr);
