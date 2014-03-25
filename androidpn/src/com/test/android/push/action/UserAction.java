@@ -21,7 +21,7 @@ public class UserAction extends BaseAction {
 	private String password;
 	
 //	@Action(value="apnlist",results = { @Result(name = "success", location = "/android/user/list.jsp")})
-	@Action(value = "login")
+	@Action(value = "login" )
 	public String login(){
 		log.debug("--- login() start ---");
 		log.debug("username = " + username);
@@ -36,7 +36,11 @@ public class UserAction extends BaseAction {
 			sendAjaxResponse("0");
 			return null;
 		}
-		
+		try {
+			Thread.sleep(500);
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
+		}
 		try {
 			username = URLDecoder.decode(username, "utf-8").trim();
 			password = URLDecoder.decode(password, "utf-8");
