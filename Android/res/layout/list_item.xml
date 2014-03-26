@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/meg_list"
+    android:orientation="horizontal">
+    
+    <LinearLayout android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="left">
+		<ImageView android:id="@+id/head_pic"
+		    android:layout_width="60dip"
+		    android:layout_height="60dip"
+		    android:layout_weight="1"
+		    android:layout_margin="10dip"
+		    android:layout_marginRight="1dip"
+		    android:src="@drawable/defaultpic"/>
+    </LinearLayout>
+    
+   <LinearLayout android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:orientation="vertical"
+		android:layout_weight="1" android:layout_gravity="center_vertical">
+		<!-- 内容显示布局 -->
+		<LinearLayout android:layout_height="wrap_content"
+			android:layout_width="fill_parent" android:gravity="center">
+			<TextView android:text="admin"
+				android:layout_width="fill_parent" android:layout_height="wrap_content"
+				android:id="@+id/nickname_text" android:layout_weight="1" />
+		</LinearLayout>
+
+		<LinearLayout android:layout_height="fill_parent"
+			android:layout_width="wrap_content" android:gravity="left|center_vertical"
+			android:layout_marginTop="5dp">
+			<TextView android:layout_width="fill_parent"
+				android:layout_height="wrap_content" android:id="@+id/description_text"
+				android:layout_weight="1" android:text="面朝大海，春暖花开。" />
+		</LinearLayout>
+	</LinearLayout>
+    
+    <!-- 右边布局 -->
+	<LinearLayout android:layout_height="fill_parent"
+		android:layout_width="wrap_content" android:gravity="center"
+		android:layout_marginRight="10dp">
+		<ImageView android:layout_height="wrap_content"
+			android:layout_width="wrap_content" android:background="@android:drawable/ic_media_next" />
+	</LinearLayout>
+	
+</LinearLayout>
