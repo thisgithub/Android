@@ -17,4 +17,10 @@
 <!-- 	<string name="urlConnection">http://10.10.38.108:8080/androidpn</string> -->
 	
 	<string name="user_login_action">/manage/login.action</string>
+	
+	<string name="action_search">Search</string>
+	<string name="action_setting">Setting</string>
+	<string name="action_plus">plus</string>
+	<string name="menu1">menu1</string>
+	<string name="menu2">menu2</string>
 </resources>

@@ -5,25 +5,13 @@
     android:background="@drawable/page_bg"
     android:gravity="center_horizontal"
     android:orientation="vertical" >
-    <LinearLayout android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/nav_bg"
-	    android:padding="5dp"
-	    android:weightSum="1"
-        android:gravity="center">
-        <TextView android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/top_text"
-            android:id="@+id/top_text"
-            style="@style/top_text_style"/>
-    </LinearLayout>
 	
     <RelativeLayout android:layout_width="match_parent"
         android:layout_height="130dip"
         android:layout_gravity="center"
         android:layout_marginLeft="10.0dp"
         android:layout_marginRight="10.0dp"
-        android:layout_marginTop="10.0dp"
+        android:layout_marginTop="30.0dp"
         android:paddingBottom="10dp"
         android:background="@drawable/background">
         
