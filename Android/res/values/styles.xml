@@ -23,4 +23,8 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <!-- 操作栏透明true/false -->
+    <style name="CustomActionBarTheme" parent="@android:style/Theme.Holo">
+        <item name="android:windowActionBarOverlay">false</item>
+    </style>
 </resources>
