@@ -20,7 +20,18 @@
 	
 	<string name="action_search">Search</string>
 	<string name="action_setting">Setting</string>
+	
 	<string name="action_plus">plus</string>
-	<string name="menu1">menu1</string>
-	<string name="menu2">menu2</string>
+	<string name="group_chat">发起群聊</string>
+	<string name="add_friends">添加朋友</string>
+	<string name="watch_chat">视频聊天</string>
+	<string name="to_sweep">扫一扫</string>
+	<string name="photo_share">拍照分享</string>
+	
+	<string name="myself">自己</string>
+	<string name="my_pic">我的相册</string>
+	<string name="my_collect">我的收藏</string>
+	<string name="my_cards">我的银行卡</string>
+	<string name="my_setting">设置</string>
+	<string name="my_feedback">意见反馈</string>
 </resources>
