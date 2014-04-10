@@ -34,4 +34,13 @@
 	<string name="my_cards">我的银行卡</string>
 	<string name="my_setting">设置</string>
 	<string name="my_feedback">意见反馈</string>
+	
+	<string name="message_text">消息</string>
+	<string name="contacts_text">联系人</string>
+	<string name="news_text">动态</string>
+	<string name="setting_text">设置</string>
+	
+	<string name="chat_text">聊天</string>
+	<string name="fount_text">发现</string>
+	<string name="maillist_text">通讯录</string>
 </resources>

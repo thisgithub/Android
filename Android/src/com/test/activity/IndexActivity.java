@@ -5,6 +5,9 @@ import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -30,10 +33,10 @@ public class IndexActivity extends BaseActivity implements OnClickListener{
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		//requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.index);
-		topText = (TextView)findViewById(R.id.top_bar_center_text);
-		topText.setText(R.string.index_text);
+		//topText = (TextView)findViewById(R.id.top_bar_center_text);
+		//topText.setText(R.string.index_text);
 		list = (ListView)findViewById(R.id.list);
 		gridView = (GridView)findViewById(R.id.gridList);
 		imageAdapter = new ImageAdapter(this);
@@ -42,54 +45,54 @@ public class IndexActivity extends BaseActivity implements OnClickListener{
 		list.setAdapter(strListAdapter);
 		
 		//
-		Button gridBtn = (Button)findViewById(R.id.top_bar_right_button);
-		exitBtn = (Button)findViewById(R.id.top_bar_left_button);
-		gridBtn.setOnClickListener(this);
-		exitBtn.setOnClickListener(this);
+		//Button gridBtn = (Button)findViewById(R.id.top_bar_right_button);
+		//exitBtn = (Button)findViewById(R.id.top_bar_left_button);
+		//gridBtn.setOnClickListener(this);
+		//exitBtn.setOnClickListener(this);
 	}
 
 	@Override
 	public void onClick(View v) {
 		switch(v.getId()){
-		case R.id.top_bar_right_button:
-			if(showType == 0){
-				showType = 1;
-				gridView.setNumColumns(4);
-				gridView.setVisibility(View.VISIBLE);
-				list.setVisibility(View.GONE);
-				gridView.setAdapter(imageAdapter);
-				imageAdapter.notifyDataSetChanged();
-			} else {
-				showType = 0;
-				list.setVisibility(View.VISIBLE);
-				gridView.setVisibility(View.GONE);
-				list.setAdapter(strListAdapter);
-				strListAdapter.notifyDataSetChanged();
-			}
-			break;
-		case R.id.top_bar_left_button:
-			String msg = "确定要退出吗？";
-			Builder builder = new Builder(IndexActivity.this);
-			builder.setTitle("提示");
-			builder.setMessage(msg);
-			builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					LogUtil.debug("------------退出-----------");
-					SharedPreferencesUtil.clearUserInfo(getApplicationContext());
-					IndexActivity.this.finish();
-					android.os.Process.killProcess(android.os.Process.myPid());
-					System.exit(0);
-				}
-			});
-			builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					dialog.cancel();
-				}
-			});
-			
-			builder.show();
+//		case R.id.top_bar_right_button:
+//			if(showType == 0){
+//				showType = 1;
+//				gridView.setNumColumns(4);
+//				gridView.setVisibility(View.VISIBLE);
+//				list.setVisibility(View.GONE);
+//				gridView.setAdapter(imageAdapter);
+//				imageAdapter.notifyDataSetChanged();
+//			} else {
+//				showType = 0;
+//				list.setVisibility(View.VISIBLE);
+//				gridView.setVisibility(View.GONE);
+//				list.setAdapter(strListAdapter);
+//				strListAdapter.notifyDataSetChanged();
+//			}
+//			break;
+//		case R.id.top_bar_left_button:
+//			String msg = "确定要退出吗？";
+//			Builder builder = new Builder(IndexActivity.this);
+//			builder.setTitle("提示");
+//			builder.setMessage(msg);
+//			builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+//				@Override
+//				public void onClick(DialogInterface dialog, int which) {
+//					LogUtil.debug("------------退出-----------");
+//					SharedPreferencesUtil.clearUserInfo(getApplicationContext());
+//					IndexActivity.this.finish();
+//					android.os.Process.killProcess(android.os.Process.myPid());
+//					System.exit(0);
+//				}
+//			});
+//			builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+//				@Override
+//				public void onClick(DialogInterface dialog, int which) {
+//					dialog.cancel();
+//				}
+//			});
+//			
+//			builder.show();
 		}
 	}
 	
@@ -146,6 +149,30 @@ public class IndexActivity extends BaseActivity implements OnClickListener{
 	//
 	private void onExitCurrentApplication(){
 		
+	}
+	
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// TODO Auto-generated method stub
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.activity_main, menu);
+		return super.onCreateOptionsMenu(menu);
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// TODO Auto-generated method stub
+		switch(item.getItemId()){
+		case R.id.action_search:
+			//
+			return true;
+		case R.id.action_settings:
+			//
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
 	}
 	
 }

@@ -3,47 +3,63 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="fill_parent"
   android:layout_height="wrap_content"
-  android:background="@drawable/nav_bg"
-  android:padding="5dp"
-  android:weightSum="1">
+  android:background="@drawable/bg">
     <!-- 顶部工具栏布局 -->
     	<!-- 左边按钮显示区 -->
     	<LinearLayout 
 	    	android:layout_height="fill_parent"
 	    	android:layout_width="wrap_content"
-	    	android:gravity="center"
 	    	>
-	    	<Button 
-	    		android:layout_height="wrap_content"
-	    		android:layout_width="wrap_content"
-	    		android:id="@+id/top_bar_left_button"
-	    		android:background="@drawable/exit_btn_selector"
-	    	/>
-    	</LinearLayout>
-    	<!-- 中间图片显示区 -->
-    	<LinearLayout 
-	    	android:layout_height="fill_parent" 
-	    	android:layout_width="wrap_content"
-	    	android:layout_weight="1"
-	    	android:gravity="center"
-	    	>
-	    	 <TextView 
-	    	 	android:layout_height="wrap_content"
-	    		android:layout_width="wrap_content"
-	    		android:id="@+id/top_bar_center_text"
-	    		style="@style/top_text_style"
-	    	 />
-    	</LinearLayout>
-    	<!-- 右边图片显示区 -->
-    	<LinearLayout 
-	    	android:layout_height="fill_parent"
-	    	android:layout_width="wrap_content"
-	    	android:gravity="center">
-	    	<Button 
-	    		android:layout_height="wrap_content"
-	    		android:layout_width="wrap_content"
-	    		android:id="@+id/top_bar_right_button"
-	    		android:background="@drawable/transform_btn_selector"
-	    	/>
+	    	<RelativeLayout android:id="@+id/chat"
+	    	    android:layout_width="0dp"
+	    	    android:layout_height="match_parent"
+	    	    android:layout_weight="1">
+	    	    <LinearLayout android:layout_width="match_parent"
+	    	        android:layout_height="wrap_content"
+	    	        android:layout_centerInParent="true"
+	    	        android:orientation="vertical">
+	    	        <TextView android:id="@+id/chat_text"
+	    	            android:layout_width="wrap_content"
+	    	            android:layout_height="wrap_content"
+	    	            android:layout_gravity="center_horizontal"
+	    	            android:text="@string/chat_text"
+	    	            android:padding="10dp"
+	    	            android:textColor="@drawable/black"/>
+	    	    </LinearLayout>
+	    	</RelativeLayout>
+	    	
+	    	<RelativeLayout android:id="@+id/found"
+	    	    android:layout_width="0dp"
+	    	    android:layout_height="match_parent"
+	    	    android:layout_weight="1">
+	    	    <LinearLayout android:layout_width="match_parent"
+	    	        android:layout_height="wrap_content"
+	    	        android:layout_centerInParent="true"
+	    	        android:orientation="vertical">
+	    	        <TextView android:layout_width="wrap_content"
+	    	            android:layout_height="wrap_content"
+	    	            android:layout_gravity="center_horizontal"
+	    	            android:text="@string/fount_text"
+	    	            android:padding="10dp"
+	    	            android:textColor="@drawable/black"/>
+	    	    </LinearLayout>
+	    	</RelativeLayout>
+	    	
+	    	<RelativeLayout android:id="@+id/maillist"
+	    	    android:layout_width="0dp"
+	    	    android:layout_height="match_parent"
+	    	    android:layout_weight="1">
+	    	    <LinearLayout android:layout_width="match_parent"
+	    	        android:layout_height="wrap_content"
+	    	        android:layout_centerInParent="true"
+	    	        android:orientation="vertical">
+	    	        <TextView android:layout_width="wrap_content"
+	    	            android:layout_height="wrap_content"
+	    	            android:layout_gravity="center_horizontal"
+	    	            android:padding="10dp"
+	    	            android:text="@string/maillist_text"
+	    	            android:textColor="@drawable/black"/>
+	    	    </LinearLayout>
+	    	</RelativeLayout>
     	</LinearLayout>
 </LinearLayout>
