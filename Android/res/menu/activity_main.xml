@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+<menu xmlns:android="http://schemas.android.com/apk/res/android" 
+    >
     <item android:title="@string/action_search"
         android:id="@+id/action_search"
-        android:icon="@drawable/ic_action_search"
+        android:icon="@drawable/ic_search"
         android:showAsAction="always"/>
     
     <item android:title="@string/action_plus"
@@ -11,34 +12,46 @@
         android:showAsAction="always">
         <menu>
             <item android:id="@+id/group_chat"
+                android:icon="@drawable/chat"
                 android:title="@string/group_chat"/>
             <item android:id="@+id/add_friends"
+                android:icon="@drawable/friend_add"
                 android:title="@string/add_friends"/>
             <item android:id="@+id/watch_chat"
+                android:icon="@drawable/video"
                 android:title="@string/watch_chat"/>
             <item android:id="@+id/to_sweep"
+                android:icon="@drawable/sweep"
                 android:title="@string/to_sweep"/>
             <item android:id="@+id/photo_share"
+                android:icon="@drawable/camera"
                 android:title="@string/photo_share"/>
         </menu>
     </item>
     
-    <item android:id="@+id/myself"
-        android:title="@string/myself"
-        android:showAsAction="never"/>
-    <item android:id="@+id/my_pic"
-        android:title="@string/my_pic"
-        android:showAsAction="never"/>
-	<item android:title="@string/my_collect"
-	    android:showAsAction="never"
-	    android:id="@+id/my_collect"/>
-	<item android:title="@string/my_cards"
-	    android:showAsAction="never"
-	    android:id="@+id/my_cards"/>
-	<item android:title="@string/my_setting"
-	    android:showAsAction="never"
-	    android:id="@+id/my_setting"/>
-	<item android:title="@string/my_feedback"
-	    android:showAsAction="never"
-	    android:id="@+id/action_settings"/>
+    <item android:id="@+id/others"
+        android:icon="@drawable/ic_menu_back"
+        android:title="@string/setting_text"
+        android:showAsAction="always">
+        <menu>
+             <item android:id="@+id/myself"
+		        android:icon="@drawable/my_self"
+		        android:title="@string/myself"/>
+		    <item android:id="@+id/my_pic"
+		        android:icon="@drawable/my_pic"
+		        android:title="@string/my_pic"/>
+			<item android:id="@+id/my_collect"
+			    android:icon="@drawable/my_collect"
+			    android:title="@string/my_collect"/>
+			<item android:id="@+id/my_cards"
+			    android:icon="@drawable/credit_card"
+			    android:title="@string/my_cards"/>
+			<item android:id="@+id/my_setting"
+			    android:icon="@drawable/setting"
+			    android:title="@string/my_setting"/>
+			<item android:id="@+id/my_feedback"
+			    android:icon="@drawable/feedback"
+			    android:title="@string/my_feedback"/>
+        </menu>
+    </item>
 </menu>

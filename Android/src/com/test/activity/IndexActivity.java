@@ -167,7 +167,7 @@ public class IndexActivity extends BaseActivity implements OnClickListener{
 		case R.id.action_search:
 			//
 			return true;
-		case R.id.action_settings:
+		case R.id.my_feedback:
 			//
 			return true;
 		default:
